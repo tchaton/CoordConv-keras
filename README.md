@@ -5,9 +5,8 @@ Extends the `CoordinateChannel` concatenation from only 2D rank (images) to 1D (
 
 # Usage
 
-Import `coord.py` and call it *before* any convolution layer in order to attach the coordinate channels to the input.
+Import `coord.py` and call the layer CoordConv2DLayer
 
-There are **3 different versions of CoordinateChannel** - 1D, 2D and 3D for each of `Conv1D`, `Conv2D` and `Conv3D`. 
 
 ```python
 from coord import CoordConv2d
@@ -15,10 +14,19 @@ from coord import CoordConv2d
 # prior to first conv
 ip = Input(shape=(64, 64, 2))
 x = CoordConv2d()(ip)
-x = Conv2D(...)(x)  # This defines the `CoordConv` from the paper.
 ...
 x = CoordConv2d(with_r=True)(x)
-x = Conv2D(...)(x)  # This adds the 3rd channel for the radius.
+```
+Import `coordT.py` and call the layer CoordConv2DTranspose
+
+```python
+from coord import CoordConv2DTranspose
+
+# prior to first conv
+ip = Input(shape=(64, 64, 2))
+x = CoordConv2DTranspose()(ip)
+...
+x = CoordConv2DTranspose(with_r=True)(x)
 ```
 
 # Refers
